@@ -29,6 +29,7 @@ Also used [StellarSand github repositoty](https://github.com/StellarSand/privacy
    - [Install Google Chrome](#install-google-chrome)
    - [Block Google Chrome Access to a List of URLs](#block-google-chrome-access-to-a-list-of-urls)
    - [Check Execution Policy](#check-execution-policy)
+   - [Install Software](#install-software)
 
 5. [Images](#images-for-windows-11-personalization-and-privacy-settings)  
    - [Privacy and Security Settings](#privacy-and-security-settings)  
@@ -361,13 +362,20 @@ Set-ItemProperty -Path $Key -Name LockScreenImagePath -value $ImagePath
 
 ### Install software
 
-This installs software silently. Keep in mind that if you fo no run this as administrator if will ask you your admin password. 
-Additionally if you have to pass activation code it will not be done automatically. You have to do it manually.
+This installs software silently. Keep in mind that if you do not run this as administrator it will ask you your admin password. 
+Additionally if you have to pass activation code it will not be done automatically. You have to add it manually.
 
 ```powershell
 
-$FilePath = "C:\your_file.exe"
-Start-Process -Wait -FilePath $FilePath -Args "/silent" -PassThru
+$folderPath = "C:\path to your\folder"
+# Get all exe files in the folder
+$fileNames = Get-ChildItem -Path $folderPath -Recurse -Include *.exe
+ForEach ($fileName in $fileNames) {
+    $FilePath = $fileName.FullName
+    Write-Host "Installing $FilePath"
+    Start-Process -Wait -FilePath $FilePath -Args "/silent" -PassThru
+}
+
 ```
 
 ## Images for Windows 11 Personalization and Privacy Settings
