@@ -26,7 +26,8 @@ Also used [StellarSand github repositoty](https://github.com/StellarSand/privacy
    - [Set Home Location](#set-home-location)  
    - [Set Language List](#set-language-list)  
    - [Set Time Zone](#set-time-zone)  
-   - [Install Google Chrome](#install-google-chrome)  
+   - [Install Google Chrome](#install-google-chrome)
+   - [Block Google Chrome Access to a List of URLs](#block-google-chrome-access-to-a-list-of-urls)
 
 ---
 
@@ -270,4 +271,53 @@ Start-Process -FilePath "$InstallerPath$Installer" -Args "/silent /install" -Ver
 Remove-Item $InstallerPath$Installer
 
 Write-Host "Google Chrome has been installed successfully."
+```
+
+### Block Google Chrome access to a list of URLs
+
+Block Google Chrome access to a list of URLs
+- facebook
+- instagram
+
+Then blocking you see this message when trying to access facebook.com or instagram.com
+
+![block message](/Images/Facebook_blocked.jpg)
+
+** Why you might want to block facebook and instagram? **
+- Productivity 
+    - They are time wasters
+- Security
+    -  Employees may unknowingly click on malicious links shared through these platforms.
+    - Cybercriminals can spread malware through ads, messages, or fake accounts.
+    - Limiting access reduces the risk of security breaches or compromised systems.
+- Speed
+    - Social media platforms, especially video- and image-heavy ones like Instagram, consume significant amounts of bandwidth.
+
+
+> **Note:** This blocks only Google Chrome access to these URLs. You can still access them with other browsers. If this is the issue you might want to block them in other browsers or ban other browsers with company policy or with other tools.
+
+
+```powershell
+$settings = 
+[PSCustomObject]@{ # block facebook
+    Path  = "SOFTWARE\Policies\Google\Chrome\URLBlocklist"
+    Value = "facebook.com"
+    Name  = ++$count
+},
+[PSCustomObject]@{ # block instagram
+    Path  = "SOFTWARE\Policies\Google\Chrome\URLBlocklist"
+    Value = "instagram.com"
+    Name  = ++$count
+} | group Path
+
+foreach($setting in $settings){
+    $registry = [Microsoft.Win32.Registry]::LocalMachine.OpenSubKey($setting.Name, $true)
+    if ($null -eq $registry) {
+        $registry = [Microsoft.Win32.Registry]::LocalMachine.CreateSubKey($setting.Name, $true)
+    }
+    $setting.Group | %{
+        $registry.SetValue($_.name, $_.value)
+    }
+    $registry.Dispose()
+}
 ```
