@@ -20,7 +20,7 @@ Also used [StellarSand github repositoty](https://github.com/StellarSand/privacy
 
 3. [Create New Local User](#create-new-local-user)  
    - [Check Existing Users](#check-existing-users)  
-   - [Create a User with Password and Add to Users Group](#create-a-user-with-password-and-add-to-users-group)  
+   - [Create a User with Password and Add to Users Group](#create-user-with-password-and-add-to-users-group)  
 
 4. [New User Setup](#new-user-setup)  
    - [Set Home Location](#set-home-location)  
@@ -147,6 +147,8 @@ Get-AppxPackage -AllUsers | ?{$_.name -in $app_packages} | Remove-AppxPackage -A
 ```
 
 ## Local Group Policy Editor
+
+### Enabling Local Group Policy Editor on Windows 11
 
 To disable installation of apps you perhaps want to use Local Group Policy Editor.
 
