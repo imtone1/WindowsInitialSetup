@@ -175,6 +175,8 @@ After it you should be able to open Local Group Policy Editor by Win + r and typ
 
 Check first what users you have on computer
 
+### Check existing users
+
 **Get only Enabled users:**
 
 ```powershell
@@ -189,7 +191,7 @@ You might want to check all properties if users seems schetchy
 Get-LocalUser | select *
 ```
 
-**Create user with password and add him to Users group:**
+### Create user with password and add him to Users group
 
 Remember to setup your own USERNAME and PASSWORD!
 
