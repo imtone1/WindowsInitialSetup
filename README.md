@@ -329,6 +329,17 @@ foreach($setting in $settings){
 }
 ```
 
+### Check Execution Policy
+
+Make sure that you do not have Bypass in regular user execution policy.
+Normally you do not want to see Bypass list. You can change it with Set-ExecutionPolicy command.
+
+You can read about setting execution policy [here](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.security/set-executionpolicy?view=powershell-7.4)
+
+```powershell
+Get-ExecutionPolicy -List
+```
+
 ### Lock screen background to image
 
 ```powershell
