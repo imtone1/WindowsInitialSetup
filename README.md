@@ -122,6 +122,8 @@ Be very mindful what you remove. Powershell is very powerful tool and you can br
 #"Microsoft.WindowsCamera"
 
 #"Microsoft.WindowsAlarms"
+#screenshot
+#"Microsoft.ScreenSketch"
 #if not used, delete
 #"Microsoft.PowerAutomateDesktop"
 
@@ -137,7 +139,6 @@ $app_packages =
 "Microsoft.ZuneVideo",
 "Microsoft.People",
 "MicrosoftCorporationII.QuickAssist",
-"Microsoft.ScreenSketch",
 "Microsoft.MicrosoftSolitaireCollection",
 "Microsoft.MicrosoftStickyNotes",
 "Microsoft.BingWeather",
@@ -320,4 +321,18 @@ foreach($setting in $settings){
     }
     $registry.Dispose()
 }
+```
+
+### Lock screen background to image
+
+```powershell
+$ImagePath="C:\path to your\file.jpg"
+$Key = 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\PersonalizationCSP'
+
+# testing if path exists in the system
+# Out-Null suppresses any output from the New-Item command.
+if (!(Test-Path -Path $Key)) {
+   New-Item -Path $Key -Force | Out-Null
+}
+Set-ItemProperty -Path $Key -Name LockScreenImagePath -value $ImagePath
 ```
