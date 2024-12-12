@@ -359,6 +359,17 @@ Set-ItemProperty -Path $Key -Name LockScreenImagePath -value $ImagePath
 
 [removing adds from windows](https://www.geeksforgeeks.org/disable-annoying-ads-on-windows/)
 
+### Install software
+
+This installs software silently. Keep in mind that if you fo no run this as administrator if will ask you your admin password. 
+Additionally if you have to pass activation code it will not be done automatically. You have to do it manually.
+
+```powershell
+
+$FilePath = "C:\your_file.exe"
+Start-Process -Wait -FilePath $FilePath -Args "/silent" -PassThru
+```
+
 ## Images for Windows 11 Personalization and Privacy Settings
 
 ### Privacy and Security Settings
