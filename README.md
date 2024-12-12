@@ -28,6 +28,7 @@ Also used [StellarSand github repositoty](https://github.com/StellarSand/privacy
    - [Set Time Zone](#set-time-zone)  
    - [Install Google Chrome](#install-google-chrome)
    - [Block Google Chrome Access to a List of URLs](#block-google-chrome-access-to-a-list-of-urls)
+   - [Check Execution Policy](#check-execution-policy)
 
 5. [Images](#images-for-windows-11-personalization-and-privacy-settings)  
    - [Privacy and Security Settings](#privacy-and-security-settings)  
