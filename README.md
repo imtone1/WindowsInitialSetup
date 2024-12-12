@@ -283,7 +283,7 @@ Then blocking you see this message when trying to access facebook.com or instagr
 
 ![block message](/Images/Facebook_blocked.jpg)
 
-** Why you might want to block facebook and instagram? **
+**Why you might want to block facebook and instagram?**
 - Productivity 
     - They are time wasters
 - Security
