@@ -350,29 +350,29 @@ Set-ItemProperty -Path $Key -Name LockScreenImagePath -value $ImagePath
 ## Images for Windows 11 Personalization and Privacy Settings
 
 ### Privacy and Security Settings
-- ![General Privacy and Security](Images/General_privacy_security.jpg)
-- ![Activity History Privacy and Security](Images/Activity_history_privacy_security.jpg)
-- ![Diagnostics Privacy and Security](Images/Diagnostics_privacy_security.jpg)
-- ![Search Permissions Privacy Security](Images/Search_permissions_privacy_security.jpg)
-- ![Search Permissions 2 Privacy Security](Images/Search_permissions2_privacy_security.jpg)
-- ![Speech Accessibility](Images/Speech_accessibility.jpg)
-- ![Speech Privacy and Security](Images/Speech_privacy_security.jpg)
-- ![Typing Personalisation](Images/Typing_personalisation.jpg)
-- ![Typing Privacy and Security](Images/Typing_privacy_security.jpg)
+![General Privacy and Security](Images/General_privacy_security.jpg)
+![Activity History Privacy and Security](Images/Activity_history_privacy_security.jpg)
+![Diagnostics Privacy and Security](Images/Diagnostics_privacy_security.jpg)
+![Search Permissions Privacy Security](Images/Search_permissions_privacy_security.jpg)
+![Search Permissions 2 Privacy Security](Images/Search_permissions2_privacy_security.jpg)
+![Speech Accessibility](Images/Speech_accessibility.jpg)
+![Speech Privacy and Security](Images/Speech_privacy_security.jpg)
+![Typing Personalisation](Images/Typing_personalisation.jpg)
+![Typing Privacy and Security](Images/Typing_privacy_security.jpg)
 
 ### Personalization Settings
-- ![Background Personalisation](Images/Background_personalisation.jpg)
-- ![Device Usage Personalisation](Images/Device_usage_personalisation.jpg)
-- ![Lock Screen Personalisation](Images/Lock_screen_personalization.jpg)
-- ![Start Personalisation](Images/Start_personalisation.jpg)
-- ![Taskbar Personalisation](Images/Taskbar_personalisation.jpg)
+![Background Personalisation](Images/Background_personalisation.jpg)
+![Device Usage Personalisation](Images/Device_usage_personalisation.jpg)
+![Lock Screen Personalisation](Images/Lock_screen_personalization.jpg)
+![Start Personalisation](Images/Start_personalisation.jpg)
+![Taskbar Personalisation](Images/Taskbar_personalisation.jpg)
 
 ### Accessibility Features
-- ![Narrator](Images/Narrator.jpg)
-- ![Typing Insights](Images/Typing_insights.jpg)
-- ![Typing Time Language](Images/Typing_time_language.jpg)
+![Narrator](Images/Narrator.jpg)
+![Typing Insights](Images/Typing_insights.jpg)
+![Typing Time Language](Images/Typing_time_language.jpg)
 
 ### System Features
-- ![Game Bar](Images/Game_bar.jpg)
-- ![Game Mode](Images/Game_mode.jpg)
-- ![Share Across Devices](Images/Share_across_devices.jpg)
+![Game Bar](Images/Game_bar.jpg)
+![Game Mode](Images/Game_mode.jpg)
+![Share Across Devices](Images/Share_across_devices.jpg)
