@@ -336,3 +336,7 @@ if (!(Test-Path -Path $Key)) {
 }
 Set-ItemProperty -Path $Key -Name LockScreenImagePath -value $ImagePath
 ```
+
+### Disable Ads on Windows 11
+
+[removing adds from windows](https://www.geeksforgeeks.org/disable-annoying-ads-on-windows/)
