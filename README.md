@@ -382,32 +382,6 @@ ForEach ($fileName in $fileNames) {
 
 You can set default apps with Powershell. You can read more about it [here](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/export-or-import-default-application-associations?view=windows-11)
 
-Export default app association settings
-
-```powershell
-dism /online /Export-DefaultAppAssociations:"C:\associations.xml"
-```
-
-Set default app association settings
-
-```powershell
-$associations_xml = @"
-<?xml version="1.0" encoding="UTF-8"?>
-<DefaultAssociations>
-  <Association Identifier=".htm" ProgId="ChromeHTML" ApplicationName="Google Chrome" />
-  <Association Identifier=".html" ProgId="ChromeHTML" ApplicationName="Google Chrome" />
-  <Association Identifier=".pdf" ProgId="ChromeHTML" ApplicationName="Google Chrome" />
-  <Association Identifier="http" ProgId="ChromeHTML" ApplicationName="Google Chrome" />
-  <Association Identifier="https" ProgId="ChromeHTML" ApplicationName="Google Chrome" />
-</DefaultAssociations>
-"@
-
-$provisioning = ni "$($env:ProgramData)\provisioning" -ItemType Directory -Force
-
-$associations_xml | Out-File "$($provisioning.FullName)\associations.xml" -Encoding utf8
-
-dism /online /Import-DefaultAppAssociations:"$($provisioning.FullName)\associations.xml"
-```
 
 
 ## Images for Windows 11 Personalization and Privacy Settings
