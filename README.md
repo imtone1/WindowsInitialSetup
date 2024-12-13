@@ -8,21 +8,23 @@ Also used [StellarSand github repositoty](https://github.com/StellarSand/privacy
 
 
 ## Table of Contents  
+1. [Checklist Excel](#checklist-excel)  
+   - [Checklist Excel](#checklist-excel)
 
-1. [Administrator Setup](#administrator-setup)  
+2. [Administrator Setup](#administrator-setup)  
    - [Disable Widgets in Taskbar](#disable-widgets-in-taskbar)  
    - [Disable Privacy Experience for New Users](#disable-privacy-experience-for-new-users)  
    - [Copy Settings to New Users and Welcome Screen](#copy-settings-to-new-users-and-welcome-screen)  
    - [Remove Multiple App Packages for All Users](#remove-multiple-app-packages-for-all-users)  
 
-2. [Local Group Policy Editor](#local-group-policy-editor)  
+3. [Local Group Policy Editor](#local-group-policy-editor)  
    - [Enabling Local Group Policy Editor on Windows 11](#enabling-local-group-policy-editor-on-windows-11)  
 
-3. [Create New Local User](#create-new-local-user)  
+4. [Create New Local User](#create-new-local-user)  
    - [Check Existing Users](#check-existing-users)  
    - [Create a User with Password and Add to Users Group](#create-user-with-password-and-add-to-users-group)  
 
-4. [New User Setup](#new-user-setup)  
+5. [New User Setup](#new-user-setup)  
    - [Set Home Location](#set-home-location)  
    - [Set Language List](#set-language-list)  
    - [Set Time Zone](#set-time-zone)  
@@ -30,9 +32,6 @@ Also used [StellarSand github repositoty](https://github.com/StellarSand/privacy
    - [Block Google Chrome Access to a List of URLs](#block-google-chrome-access-to-a-list-of-urls)
    - [Check Execution Policy](#check-execution-policy)
    - [Install Software](#install-software)
-
-5. [Checklist Excel](#checklist-excel)  
-   - [Checklist Excel](#checklist-excel)
 
 6. [Images](#images-for-windows-11-personalization-and-privacy-settings)  
    - [Privacy and Security Settings](#privacy-and-security-settings)  
@@ -42,6 +41,13 @@ Also used [StellarSand github repositoty](https://github.com/StellarSand/privacy
 
 ---
 
+## Checklist Excel
+
+You can use this checklist to document settings. You can download it from here:
+
+[Checklist in Excel](Windows11_checklist.xlsx)
+
+---
 
 ## Administator setup
 
@@ -381,9 +387,6 @@ ForEach ($fileName in $fileNames) {
 
 ```
 
-## Checklist Excel
-
-[Checklist in Excel](Windows11_checklist.xlsx)
 
 ### Default Apps
 
