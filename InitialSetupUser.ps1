@@ -30,33 +30,25 @@ catch {
     Write-Host "Failed to install Google Chrome." -ForegroundColor Red
 }
 
-try{
-Write-Host "Blocking: $($BlockedUrls -join ', ')" -ForegroundColor Cyan
-$count = 0
+try {
+    Write-Host "Blocking URLs: $($BlockedUrls -join ', ')" -ForegroundColor Cyan
+# Registry Path for Chrome URLBlocklist
+$registryPath = "SOFTWARE\Policies\Google\Chrome\URLBlocklist"
+
+# Open or create the registry key
+$registry = [Microsoft.Win32.Registry]::LocalMachine.CreateSubKey($registryPath, $true)
+if ($registry) {
+    # Set each blocked URL in the URLBlocklist
+    $count = 0
     foreach ($url in $BlockedUrls) {
         $count++
-        $settings = 
-        [PSCustomObject]@{ # block facebook
-            Path  = "SOFTWARE\Policies\Google\Chrome\URLBlocklist"
-            Value = $url
-            Name  = $count
-        }
-    } | group Path
-Write-Host "Blocking $url" -ForegroundColor Cyan
-Write-Host "blocking settings $settings" -ForegroundColor Cyan
-
-foreach($setting in $settings){
-    $registry = [Microsoft.Win32.Registry]::LocalMachine.OpenSubKey($setting.Name, $true)
-    if ($null -eq $registry) {
-        $registry = [Microsoft.Win32.Registry]::LocalMachine.CreateSubKey($setting.Name, $true)
-    }
-    $setting.Group | %{
-        $registry.SetValue($_.name, $_.value)
+        $registry.SetValue("$count", $url, [Microsoft.Win32.RegistryValueKind]::String)
+        Write-Host "Blocked URL: $url" -ForegroundColor Green
     }
     $registry.Dispose()
-}
-
-Write-Host "Facebook and Instagram have been blocked successfully." -ForegroundColor Green
+    Write-Host "All URLs have been successfully blocked." -ForegroundColor Green
+} else {
+    Write-Host "Error: Failed to access or create Chrome registry key." -ForegroundColor Red
 }
 catch {
     Write-Host "Failed to block $BlockedUrls." -ForegroundColor Red
