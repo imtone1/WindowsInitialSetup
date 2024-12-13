@@ -50,6 +50,7 @@ if ($registry) {
 } else {
     Write-Host "Error: Failed to access or create Chrome registry key." -ForegroundColor Red
 }
+}
 catch {
     Write-Host "Failed to block $BlockedUrls." -ForegroundColor Red
 }
