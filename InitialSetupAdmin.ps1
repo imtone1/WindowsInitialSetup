@@ -1,7 +1,5 @@
 function InitialSetupAdmin{
     param(
-        [string]$UserName = "USERNAME",
-        [string]$Password = "PASSWORD",
         [int]$HomeLocation = 77, # Finland
         [string]$TimeZone = "*Helsinki*",
         [string[]]$Languages = @("fi-FI", "en-us")
@@ -17,24 +15,6 @@ function Set-RegistryValue {
     } catch {
         Write-Host "Failed to set registry value $Name in $Path. $_" -ForegroundColor Red
     }
-}
-
-# Create New Local User
-Write-Host "Creating new local user $UserName" -ForegroundColor Cyan
-try {
-    if (-not (Get-LocalUser -Name $UserName -ErrorAction SilentlyContinue)) {
-$securePassword = ConvertTo-SecureString -String $Password -AsPlainText -Force
-New-LocalUser -Name $UserName -Password $securePassword -FullName $UserName -PasswordNeverExpires
-
-Add-LocalGroupMember -Group "Users" -Member $UserName
-
-Write-Host "New local user created." -ForegroundColor Green
-} else {
-    Write-Host "User $UserName already exists." -ForegroundColor Yellow
-}
-}
-catch {
-    Write-Host "Failed to create new local user." -ForegroundColor Red
 }
 
 # Disable Widgets in Taskbar
