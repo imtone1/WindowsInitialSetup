@@ -22,12 +22,16 @@ function Set-RegistryValue {
 # Create New Local User
 Write-Host "Creating new local user $UserName" -ForegroundColor Cyan
 try {
+    if (-not (Get-LocalUser -Name $UserName -ErrorAction SilentlyContinue)) {
 $securePassword = ConvertTo-SecureString -String $Password -AsPlainText -Force
 New-LocalUser -Name $UserName -Password $securePassword -FullName $UserName -PasswordNeverExpires
 
 Add-LocalGroupMember -Group "Users" -Member $UserName
 
 Write-Host "New local user created." -ForegroundColor Green
+} else {
+    Write-Host "User $UserName already exists." -ForegroundColor Yellow
+}
 }
 catch {
     Write-Host "Failed to create new local user." -ForegroundColor Red
@@ -82,7 +86,7 @@ catch {
  # Configure User Languages
 try {
 Write-Host "Configuring user language list: $($Languages -join ', ')" -ForegroundColor Cyan
-Set-WinUserLanguageList fi-FI, en-us -force -wa silentlycontinue
+Set-WinUserLanguageList -LanguageList $Languages -force -wa silentlycontinue
 }
 catch {
     Write-Host "Failed to configure user language list." -ForegroundColor Red
