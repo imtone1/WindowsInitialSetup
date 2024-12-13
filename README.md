@@ -7,6 +7,14 @@ Used [lestdoautomation github repository](https://github.com/letsdoautomation/po
 Also used [StellarSand github repositoty](https://github.com/StellarSand/privacy-settings/blob/main/Privacy%20Settings/Windows-11.md) for privacy settings check list.
 
 
+You can run scripts in Powershell. Remember to run Powershell as administrator and to set execution policy to bypass. You can do it with this command:
+
+```powershell
+Set-ExecutionPolicy Bypass
+```
+
+> **Note:**  Remember to change execution policy back to restricted after you have run your scripts.
+
 ## Table of Contents  
 1. [Checklist Excel](#checklist-excel)  
    - [Checklist Excel](#checklist-excel)

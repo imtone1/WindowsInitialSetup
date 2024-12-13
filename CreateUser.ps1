@@ -1,7 +1,7 @@
 function CreateUser {
     param (
-        [string]$UserName = "",
-        [string]$Password = ""
+        [string]$UserName,
+        [string]$Password
     )
 # Create New Local User
 Write-Host "Creating new local user $UserName" -ForegroundColor Cyan
@@ -10,7 +10,7 @@ try {
         Write-Host "Error: Username and password are required." -ForegroundColor Red
         return
     }
-    
+
     if (-not (Get-LocalUser -Name $UserName -ErrorAction SilentlyContinue)) {
     $securePassword = ConvertTo-SecureString -String $Password -AsPlainText -Force
     New-LocalUser -Name $UserName -Password $securePassword -FullName $UserName -PasswordNeverExpires
