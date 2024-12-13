@@ -31,7 +31,10 @@ Also used [StellarSand github repositoty](https://github.com/StellarSand/privacy
    - [Check Execution Policy](#check-execution-policy)
    - [Install Software](#install-software)
 
-5. [Images](#images-for-windows-11-personalization-and-privacy-settings)  
+5. [Checklist Excel](#checklist-excel)  
+   - [Checklist Excel](#checklist-excel)
+
+6. [Images](#images-for-windows-11-personalization-and-privacy-settings)  
    - [Privacy and Security Settings](#privacy-and-security-settings)  
    - [Personalization Settings](#personalization-settings)  
    - [Accessibility Features](#accessibility-features)  
@@ -377,6 +380,10 @@ ForEach ($fileName in $fileNames) {
 }
 
 ```
+
+## Checklist Excel
+
+[Checklist in Excel](Windows11_checklist.xlsx)
 
 ### Default Apps
 
