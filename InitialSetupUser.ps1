@@ -8,16 +8,21 @@ function InitialSetupUser {
     )
 
 # Install Google Chrome
-# Download the Chrome installer
+
 try{
 Write-Host "Starting Google Chrome installation..." -ForegroundColor Cyan
-Invoke-WebRequest $ChromeInstallerUrl -OutFile $ChromeInstallerPath$ChromeInstaller ;
+
+#Installer path build
+$installerPathFull=Join-Path -Path $ChromeInstallerPath -ChildPath $ChromeInstaller
+
+# Download the Chrome installer
+Invoke-WebRequest $ChromeInstallerUrl -OutFile $installerPathFull -ErrorAction Stop;
 
 # Run the installer silently
-Start-Process -FilePath "$ChromeInstallerPath$ChromeInstaller " -Args "/silent /install" -Verb RunAs -Wait;
+Start-Process -FilePath $installerPathFull -Args "/silent /install" -Verb RunAs -Wait -ErrorAction Stop;
 
 # Clean up the installer file after installation
-Remove-Item $ChromeInstallerPath$ChromeInstaller 
+Remove-Item $installerPathFull -Force -ErrorAction Stop
 
 Write-Host "Google Chrome has been installed successfully." -ForegroundColor Green
 }
@@ -26,7 +31,7 @@ catch {
 }
 
 try{
-Write-Host "Blocking $BlockedUrls" -ForegroundColor Cyan
+Write-Host "Blocking: $($BlockedUrls -join ', ')" -ForegroundColor Cyan
 $count = 0
     foreach ($url in $BlockedUrls) {
         $count++
