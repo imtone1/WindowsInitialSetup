@@ -19,6 +19,20 @@ function Set-RegistryValue {
     }
 }
 
+# Create New Local User
+Write-Host "Creating new local user $UserName" -ForegroundColor Cyan
+try {
+$securePassword = ConvertTo-SecureString -String $Password -AsPlainText -Force
+New-LocalUser -Name $UserName -Password $securePassword -FullName $UserName -PasswordNeverExpires
+
+Add-LocalGroupMember -Group "Users" -Member $UserName
+
+Write-Host "New local user created." -ForegroundColor Green
+}
+catch {
+    Write-Host "Failed to create new local user." -ForegroundColor Red
+}
+
 # Disable Widgets in Taskbar
 Write-Host "Disabling widgets in taskbar..."
 Set-RegistryValue -Path "SOFTWARE\Policies\Microsoft\Dsh" -Name "AllowNewsAndInterests" -Value 0
@@ -80,19 +94,6 @@ Get-TimeZone -ListAvailable | ?{$_.DisplayName -like $TimeZone} | Set-TimeZone
 }
 catch {
     Write-Host "Failed to set time zone." -ForegroundColor Red
-}
-# Create New Local User
-Write-Host "Creating new local user $UserName" -ForegroundColor Cyan
-try {
-$securePassword = ConvertTo-SecureString -String $Password -AsPlainText -Force
-New-LocalUser -Name $UserName -Password $securePassword -FullName $UserName -PasswordNeverExpires
-
-Add-LocalGroupMember -Group "Users" -Member $UserName
-
-Write-Host "New local user created." -ForegroundColor Green
-}
-catch {
-    Write-Host "Failed to create new local user." -ForegroundColor Red
 }
 
 Write-Host "Function InitialSetupAdmin completed." -ForegroundColor Green
