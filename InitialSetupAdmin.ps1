@@ -30,7 +30,7 @@ Set-RegistryValue -Path "SOFTWARE\Policies\Microsoft\Windows\OOBE" -Name "Disabl
 Write-Host "OOBE Privacy Experience disabled." -ForegroundColor Green
 
 # Remove Unnecessary App Packages
-Write-Host "Removing unnecessary app packages..."
+Write-Host "Removing unnecessary app packages..." -ForegroundColor Cyan
 try {
 $app_packages = 
 "Clipchamp.Clipchamp",
@@ -50,50 +50,50 @@ $app_packages =
 "Microsoft.GamingApp",
 "*MicrosoftFamily*"
 Get-AppxPackage -AllUsers | ?{$_.name -in $app_packages} | Remove-AppxPackage -AllUsers
-Write-Host "App packages removed."
+Write-Host "App packages removed." -ForegroundColor Green
 }
 catch {
-    Write-Host "Failed to remove app packages."
+    Write-Host "Failed to remove app packages." -ForegroundColor Red
 }
 
 # Set Home Location
-Write-Host "Setting home location to $HomeLocation"
+Write-Host "Setting home location to $HomeLocation" -ForegroundColor Cyan
 try {
 Set-WinHomeLocation $HomeLocation
 }
 catch {
-    Write-Host "Failed to set home location."
+    Write-Host "Failed to set home location." -ForegroundColor Red
 }
 
  # Configure User Languages
 try {
-Write-Host "Configuring user language list: $($Languages -join ', ')"
+Write-Host "Configuring user language list: $($Languages -join ', ')" -ForegroundColor Cyan
 Set-WinUserLanguageList fi-FI, en-us -force -wa silentlycontinue
 }
 catch {
-    Write-Host "Failed to configure user language list."
+    Write-Host "Failed to configure user language list." -ForegroundColor Red
 }
 # Set Time Zone
 try {
-Write-Host "Setting time zone to match $TimeZone"
+Write-Host "Setting time zone to match $TimeZone" -ForegroundColor Cyan
 Get-TimeZone -ListAvailable | ?{$_.DisplayName -like $TimeZone} | Set-TimeZone
 }
 catch {
-    Write-Host "Failed to set time zone."
+    Write-Host "Failed to set time zone." -ForegroundColor Red
 }
 # Create New Local User
-Write-Host "Creating new local user $UserName"
+Write-Host "Creating new local user $UserName" -ForegroundColor Cyan
 try {
-$securePassword = ConvertTo-SecureString -AsPlainText $Password -Force
-$user = New-LocalUser -Name $UserName -Password $securePassword -FullName $UserName -PasswordNeverExpires $true
-$user | Set-LocalUser -PasswordNeverExpires $true 
-$user | Add-LocalGroupMember -Group "Users"
+$securePassword = ConvertTo-SecureString -String $Password -AsPlainText -Force
+New-LocalUser -Name $UserName -Password $securePassword -FullName $UserName -PasswordNeverExpires
 
-Write-Host "New local user created."
+Add-LocalGroupMember -Group "Users" -Member $UserName
+
+Write-Host "New local user created." -ForegroundColor Green
 }
 catch {
-    Write-Host "Failed to create new local user."
+    Write-Host "Failed to create new local user." -ForegroundColor Red
 }
 
-Write-Host "Function InitialSetupAdmin completed."
+Write-Host "Function InitialSetupAdmin completed." -ForegroundColor Green
 }
