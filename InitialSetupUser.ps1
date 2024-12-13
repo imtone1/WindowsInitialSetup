@@ -10,7 +10,7 @@ function InitialSetupUser {
 # Install Google Chrome
 # Download the Chrome installer
 try{
-Write-Host "Starting Google Chrome installation..."
+Write-Host "Starting Google Chrome installation..." -ForegroundColor Cyan
 Invoke-WebRequest $ChromeInstallerUrl -OutFile $ChromeInstallerPath$ChromeInstaller ;
 
 # Run the installer silently
@@ -19,14 +19,14 @@ Start-Process -FilePath "$ChromeInstallerPath$ChromeInstaller " -Args "/silent /
 # Clean up the installer file after installation
 Remove-Item $ChromeInstallerPath$ChromeInstaller 
 
-Write-Host "Google Chrome has been installed successfully."
+Write-Host "Google Chrome has been installed successfully." -ForegroundColor Green
 }
 catch {
-    Write-Host "Failed to install Google Chrome."
+    Write-Host "Failed to install Google Chrome." -ForegroundColor Red
 }
 
 try{
-Write-Host "Blocking $BlockedUrls"
+Write-Host "Blocking $BlockedUrls" -ForegroundColor Cyan
 $count = 0
     foreach ($url in $BlockedUrls) {
         $count++
@@ -37,8 +37,8 @@ $count = 0
             Name  = $count
         }
     } | group Path
-Write-Host "Blocking $url"
-Write-Host "blocking settings $settings"
+Write-Host "Blocking $url" -ForegroundColor Cyan
+Write-Host "blocking settings $settings" -ForegroundColor Cyan
 
 foreach($setting in $settings){
     $registry = [Microsoft.Win32.Registry]::LocalMachine.OpenSubKey($setting.Name, $true)
@@ -51,10 +51,10 @@ foreach($setting in $settings){
     $registry.Dispose()
 }
 
-Write-Host "Facebook and Instagram have been blocked successfully."
+Write-Host "Facebook and Instagram have been blocked successfully." -ForegroundColor Green
 }
 catch {
-    Write-Host "Failed to block $BlockedUrls."
+    Write-Host "Failed to block $BlockedUrls." -ForegroundColor Red
 }
 
 try{
@@ -67,8 +67,8 @@ ForEach ($fileName in $fileNames) {
 }
 }
 catch {
-    Write-Host "Failed to install software."
+    Write-Host "Failed to install software." -ForegroundColor Red
 }
 
-Write-Host "Function InitialSetupUser completed."
+Write-Host "Function InitialSetupUser completed." -ForegroundColor Green
 }

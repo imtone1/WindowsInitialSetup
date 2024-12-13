@@ -6,62 +6,28 @@ function InitialSetupAdmin{
         [string]$TimeZone = "*Helsinki*",
         [string[]]$Languages = @("fi-FI", "en-us")
     )
- # Disable Widgets in Taskbar
 
+function Set-RegistryValue {
+    param([string]$Path, [string]$Name, [object]$Value, [string]$Type = "DWORD")
+    try {
+        $reg = [Microsoft.Win32.Registry]::LocalMachine.OpenSubKey($Path, $true)
+        if (-not $reg) { $reg = [Microsoft.Win32.Registry]::LocalMachine.CreateSubKey($Path) }
+        $reg.SetValue($Name, $Value, [Microsoft.Win32.RegistryValueKind]::$Type)
+        $reg.Dispose()
+    } catch {
+        Write-Host "Failed to set registry value $Name in $Path. $_" -ForegroundColor Red
+    }
+}
+
+# Disable Widgets in Taskbar
 Write-Host "Disabling widgets in taskbar..."
-try {
-$settings = [PSCustomObject]@{
-    Path  = "SOFTWARE\Policies\Microsoft\Dsh" Value = 0
-    Name  = "AllowNewsAndInterests"
-} | group Path
-
-foreach ($setting in $settings) {
-    $registry = [Microsoft.Win32.Registry]::LocalMachine.OpenSubKey($setting.Name, $true)
-    if ($null -eq $registry) {
-        $registry = [Microsoft.Win32.Registry]::LocalMachine.CreateSubKey($setting.Name, $true)
-    }
-    $setting.Group | % {
-        if (!$_.Type) {
-            $registry.SetValue($_.name, $_.value)
-        }
-        else {
-            $registry.SetValue($_.name, $_.value, $_.type)
-        }
-    }
-    $registry.Dispose()
-    
-}
-Write-Host "Widgets in taskbar disabled."
-}
-catch {
-    Write-Host "Failed to disable widgets in taskbar."
-}
-
-
+Set-RegistryValue -Path "SOFTWARE\Policies\Microsoft\Dsh" -Name "AllowNewsAndInterests" -Value 0
+Write-Host "Widgets in taskbar disabled." -ForegroundColor Green
 
 # Disable OOBE Privacy Experience
 Write-Host "Disabling OOBE Privacy Experience..."
-try{
-$settings1 =
-[PSCustomObject]@{
-    Path  = "SOFTWARE\Policies\Microsoft\Windows\OOBE" Name  = "DisablePrivacyExperience" Value = 1
-} | group Path
-
-foreach ($setting in $settings1) {
-    $registry = [Microsoft.Win32.Registry]::LocalMachine.OpenSubKey($setting.Name, $true)
-    if ($null -eq $registry) {
-        $registry = [Microsoft.Win32.Registry]::LocalMachine.CreateSubKey($setting.Name, $true)
-    }
-    $setting.Group | % {
-        $registry.SetValue($_.name, $_.value)
-    }
-    $registry.Dispose()
-}
-Write-Host "OOBE Privacy Experience disabled."
-}
-catch {
-    Write-Host "Failed to disable OOBE Privacy Experience."
-}
+Set-RegistryValue -Path "SOFTWARE\Policies\Microsoft\Windows\OOBE" -Name "DisablePrivacyExperience" -Value 1
+Write-Host "OOBE Privacy Experience disabled." -ForegroundColor Green
 
 # Remove Unnecessary App Packages
 Write-Host "Removing unnecessary app packages..."
